@@ -30,7 +30,7 @@ class CarMake(models.Model):
 # - __str__ method to print a car make object
 class CarModel(models.Model):
     CarMake = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    DealerID = models.IntegerField()
+    DealerID = models.IntegerField(default=1, primary_key=True)
     name = models.CharField(null=False, max_length=30)
     SUV = "SUV"
     SEDAN = "Sedan"
@@ -42,15 +42,11 @@ class CarModel(models.Model):
 
     ]
     Type = models.CharField(choices=TYPE_CHOICES, max_length=10, default='')
-    Year = models.DateField('%Y')
+    Year = models.DateField(default=now)
 
 
     def __str__(self):
-        return "Car Make" + self.CarMake + "," + \
-                "Dealer ID" + self.DealerID + +"," + \
-                "Name" + self.name + "," + \
-                "Type" + self.Type + "," + \
-                "Year" + self.Year + ","
+        return "Name: " + self.name
             
             
 
